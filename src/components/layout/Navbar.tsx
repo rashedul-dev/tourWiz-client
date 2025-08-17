@@ -7,6 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ModeToggle } from "./ModeToggler";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -98,6 +99,7 @@ export default function Navbar() {
           <Button asChild size="sm" className="text-sm">
             <a href="#">Get Started</a>
           </Button>
+          <ModeToggle></ModeToggle>
         </div>
       </div>
     </header>
