@@ -14,6 +14,10 @@ const About = () => {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis iusto doloremque eligendi fugit sequi sapiente
         odit nesciunt quam dolor tempore incidunt facere eum, fuga ad delectus sint cum molestias aspernatur!
       </p>
+      <p className="font-extralight text-2xl">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis iusto doloremque eligendi fugit sequi sapiente
+        odit nesciunt quam dolor tempore incidunt facere eum, fuga ad delectus sint cum molestias aspernatur!
+      </p>
     </div>
   );
 };
