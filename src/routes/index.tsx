@@ -2,7 +2,7 @@ import App from "@/App";
 import AdminLayout from "@/components/layout/AdminLayout";
 import About from "@/pages/About";
 import Analatics from "@/pages/Analatics";
-// import Login from "@/pages/Login";
+import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Verify from "@/pages/Verify";
 import { createBrowserRouter } from "react-router";
@@ -18,10 +18,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   Component: Login,
-  //   path: "login",
-  // },
+  {
+    Component: Login,
+    path: "login",
+  },
   {
     Component: Register,
     path: "register",

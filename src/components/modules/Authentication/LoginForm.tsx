@@ -1,28 +1,53 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const navigate = useNavigate();
-  const form = useForm();
+  const form = useForm({
+    //! For development only
+    defaultValues: {
+      email: "rajonrajon70191@gmail.com",
+      password: "HUDAI!123",
+    },
+  });
   const [login] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     try {
       const res = await login(data).unwrap();
-      console.log(res);
-    } catch (err) {
+
+      if (res.success) {
+        toast.success("Logged in successfully");
+        navigate("/");
+      }
+    } catch (err: any) {
       console.error(err);
 
-      if (err.status === 401) {
+      if (err.data.message === "Password does not match") {
+        toast.error("Invalid credentials");
+      }
+
+      if (err.data.message === "User is not verified") {
         toast.error("Your account is not verified");
         navigate("/verify", { state: data.email });
       }
     }
+  };
+  {
+    /*//* http://localhost:5000/api/v1/auth/google */
+  }
+
+  const handleGoogleLogin = () => {
+    // localStorage.setItem("loginSuccess", "true");
+    window.open(`${config.baseUrl}/auth/google`);
+    // toast.success("Logged in successfully");
   };
 
   return (
@@ -72,7 +97,7 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
           <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
         </div>
 
-        <Button type="button" variant="outline" className="w-full cursor-pointer">
+        <Button onClick={handleGoogleLogin} type="button" variant="outline" className="w-full cursor-pointer">
           Login with Google
         </Button>
       </div>
