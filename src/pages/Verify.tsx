@@ -25,6 +25,7 @@ export default function Verify() {
   const [confirmed, setConfirmed] = useState(false);
   const [verifyOtp] = useVerifyOtpMutation();
   const [sendOtp] = useSendOtpMutation();
+  const [timer, setTimer] = useState(10);
 
   useEffect(() => {
     if (!email) {
@@ -66,10 +67,24 @@ export default function Verify() {
         setConfirmed(true);
       }
     } catch (error) {
+      toast.error("invalid OTP");
       console.log(error);
     }
     console.log(data);
   };
+
+  useEffect(() => {
+    if (!email || !confirmed) {
+      return;
+    }
+
+    const timerId = setInterval(() => {
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      console.log("Tick");
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [email, confirmed]);
 
   return (
     <div className="grid place-content-center h-screen">
@@ -114,7 +129,7 @@ export default function Verify() {
                         </InputOTP>
                       </FormControl>
                       <FormDescription>
-                        {/* <Button
+                        <Button
                           onClick={handleSendOtp}
                           type="button"
                           variant="link"
@@ -126,8 +141,7 @@ export default function Verify() {
                         >
                           Resent OPT:{" "}
                         </Button>{" "}
-                        {timer} */}
-                        <Button onClick={handleSendOtp}></Button>
+                        {timer}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
