@@ -52,7 +52,7 @@ export function RegisterForm({ className, ...props }: React.HTMLAttributes<HTMLD
       const result = await register(userInfo).unwrap();
       console.log(result);
       toast.success("User created successfully");
-      navigate("/verify");
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
