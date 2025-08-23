@@ -1,3 +1,4 @@
+import SingleImageUploader from "@/components/SingleImageUploader";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,21 +12,21 @@ import {
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useAddTourTypeMutation } from "@/redux/features/Tour/tour.api";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 export function AddDivisionModal() {
-  const form = useForm();
+  const [image, setImage] = useState<File | null>(null);
+  console.log("Inside add division model", image);
+  const form = useForm({
+    // defaultValues: {
+    //   name: "",
+    //   desciption: "",
+    // },
+  });
 
   const onSubmit = async (data: any) => {
-    // const res = await addTourType({ name: data.name }).unwrap();
-    console.log("click");
-    // if (res.success) {
-    //   toast.success("Tour Type Added");
-    // } else if (res.status == 500) {
-    //   toast.error(`Tour type already exists`);
-    // }
+    console.log(data);
   };
 
   return (
@@ -66,6 +67,7 @@ export function AddDivisionModal() {
               )}
             />
           </form>
+          <SingleImageUploader onChange={setImage}></SingleImageUploader>
         </Form>
 
         <DialogFooter>
