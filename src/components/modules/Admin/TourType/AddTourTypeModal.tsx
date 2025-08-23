@@ -24,6 +24,7 @@ export function AddTourTypeModal() {
     const res = await addTourType({ name: data.name }).unwrap();
     console.log(res.message);
     if (res.success) {
+      setOpen(false);
       toast.success("Tour Type Added");
     } else if (res.status == 500) {
       toast.error(`Tour type already exists`);
