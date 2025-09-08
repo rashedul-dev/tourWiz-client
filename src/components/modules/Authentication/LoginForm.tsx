@@ -13,8 +13,8 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
   const form = useForm({
     //! For development only
     defaultValues: {
-      email: "super@gmail.com",
-      password: "SUPER!123",
+      email: "user@gmail.com",
+      password: "!USER123",
     },
   });
   const [login] = useLoginMutation();
